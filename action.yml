@@ -1,0 +1,37 @@
+name: "PublishStaticSite"
+author: DevOps
+description: Deploy Static Site to S3 and invalidate CloudFront cache
+
+inputs:
+  bucket_name:
+    description: The bucket name used for the static deployment.
+    required: true
+  bucket_path:
+    description: The deployment path in the desired Bucket.
+    required: true
+  distribution_id:
+    description: The ID of the CloudFront Distribution.
+    required: true
+  app_path:
+    description: Path to the directory containing all static site resources necessary.
+    required: true
+  additional_bucket_args:
+    description: Additional arguments to use with the AWS CLI S3 sync command.
+    required: false
+  additional_distribution_args:
+    description: Additional arguments to use with the AWS CLI CloudFront create invalidation command.
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - id: verify-secret-action
+      env:
+        BUCKET_NAME: ${{ inputs.bucket_name }}
+        BUCKET_PATH: ${{ inputs.bucket_path }}
+        DISTRIBUTION_ID: ${{ inputs.distribution_id }}
+        APP_PATH: ${{ inputs.app_path }}
+        ADDITIONAL_BUCKET_ARGS: ${{ inputs.additional_bucket_args }}
+        ADDITIONAL_DISTRIBUTION_ARGS: ${{ inputs.additional_distribution_args }}
+      run: ${{ github.action_path }}/action.sh
+      shell: bash
