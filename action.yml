@@ -25,7 +25,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - id: verify-secret-action
+    - id: publish-static-site-action
       env:
         BUCKET_NAME: ${{ inputs.bucket_name }}
         BUCKET_PATH: ${{ inputs.bucket_path }}
