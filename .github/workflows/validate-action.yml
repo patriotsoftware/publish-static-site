@@ -1,5 +1,14 @@
 name: test-action
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      bucketName:
+        description: "bucket for dry run"
+        required: true
+      distributionId:
+        description: "distribution id for dry run"
+        required: true
+
 jobs:
   test-action:
     name: test the action
@@ -10,4 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Test
+        env:
+          BUCKET_NAME: ${{github.event.inputs.bucketName}}
+          DISTRIBUTION_ID: ${{github.event.inputs.distributionId}}
         run: ./tests/test.sh
