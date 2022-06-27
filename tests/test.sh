@@ -2,7 +2,7 @@
 TESTS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Required Variables
-export BUCKET_NAME="ps-static-dev"
+export BUCKET_NAME=""
 export BUCKET_PATH="test/app/path"
 export DISTRIBUTION_ID="any-random-id"
 export APP_PATH="$TESTS_DIR/test-app"
