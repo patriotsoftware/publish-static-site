@@ -1,0 +1,25 @@
+name: test-action
+on: 
+  workflow_dispatch:
+    inputs:
+      bucketName:
+        description: "bucket for dry run"
+        required: true
+      distributionId:
+        description: "distribution id for dry run"
+        required: true
+
+jobs:
+  test-action:
+    name: test the action
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Test
+        env:
+          BUCKET_NAME: ${{github.event.inputs.bucketName}}
+          DISTRIBUTION_ID: ${{github.event.inputs.distributionId}}
+        run: ./tests/test.sh
