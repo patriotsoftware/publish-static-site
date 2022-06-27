@@ -1,0 +1,13 @@
+name: test-action
+on: workflow_dispatch
+jobs:
+  test-action:
+    name: test the action
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Test
+        run: ./tests/test.sh
