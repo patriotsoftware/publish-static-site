@@ -3,6 +3,9 @@
 # Optional Environment Variables:
 # ADDITIONAL_BUCKET_ARGS, ADDITIONAL_DISTRIBUTION_ARGS
 
+# If any step fails, abort the script
+set -e
+
 # Synchronize App contents to S3 Bucket
 aws s3 sync $APP_PATH s3://$BUCKET_NAME/$BUCKET_PATH --delete $ADDITIONAL_BUCKET_ARGS
 
