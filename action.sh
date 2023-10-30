@@ -7,7 +7,7 @@
 set -e
 
 # Synchronize App contents to S3 Bucket
-aws s3 sync $APP_PATH s3://$BUCKET_NAME/$BUCKET_PATH --delete $ADDITIONAL_BUCKET_ARGS
+aws s3 sync $APP_PATH s3://$BUCKET_NAME/$BUCKET_PATH --delete "$ADDITIONAL_BUCKET_ARGS"
 
 # # Create a Cache Invalidation for CloudFront Distribution
 # if [[ $BUCKET_NAME != *"staging"* ]]; then
